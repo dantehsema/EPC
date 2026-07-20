@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eastminster Presbyterian Church – Hyattsville, MD</title>
+  <meta name="description" content="Eastminster Presbyterian Church is a welcoming PCUSA congregation located at 5601 Randolph Street, Hyattsville, MD 20784. Join us for Sunday worship, community events, and fellowship." />
+  <meta name="keywords" content="Eastminster Presbyterian Church, Hyattsville MD, PCUSA, church, worship, community, Maryland" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico?v=2" />
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon.png?v=2" />
+  <link rel="apple-touch-icon" href="favicon.png?v=2" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ========== HEADER ========== -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <div class="logo-block">
+        <div class="logo-cross">✝</div>
+        <div class="logo-text">
+          <span class="logo-name">Eastminster</span>
+          <span class="logo-sub">Presbyterian Church</span>
+        </div>
+      </div>
+      <nav class="tab-nav" role="tablist" aria-label="Main navigation">
+        <button class="tab-btn active" id="tab-home-btn" role="tab" aria-selected="true" aria-controls="tab-home" onclick="switchTab('home')">
+          <span class="tab-icon">⛪</span> About Us
+        </button>
+        <button class="tab-btn" id="tab-events-btn" role="tab" aria-selected="false" aria-controls="tab-events" onclick="switchTab('events')">
+          <span class="tab-icon">📅</span> Events &amp; Calendar
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Welcome to</p>
+      <h1 class="hero-title">Eastminster<br/>Presbyterian Church</h1>
+      <p class="hero-tagline">A place of worship, community, and grace in Hyattsville, Maryland</p>
+      <div class="hero-cta-group">
+        <a href="#" class="btn btn-primary" onclick="switchTab('home'); return false;">Learn More</a>
+        <a href="#" class="btn btn-outline" onclick="switchTab('events'); return false;">View Calendar</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span class="scroll-arrow">↓</span>
+    </div>
+  </section>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+
+    <!-- === TAB 1: HOME / ABOUT === -->
+    <div id="tab-home" class="tab-panel active" role="tabpanel" aria-labelledby="tab-home-btn">
+
+      <!-- WELCOME SECTION -->
+      <section class="section welcome-section">
+        <div class="container">
+          <div class="section-badge">Our Story</div>
+          <h2 class="section-title">A Welcoming Community of Faith</h2>
+          <p class="section-lead">Eastminster Presbyterian Church is a PCUSA congregation rooted in the Hyattsville community, serving Prince George's County, Maryland. We are a church family committed to worship, discipleship, and serving our neighbors with the love of Christ.</p>
+        </div>
+      </section>
+
+      <!-- IMAGE GALLERY -->
+      <section class="section gallery-section">
+        <div class="container">
+          <div class="gallery-grid">
+            <div class="gallery-item gallery-main">
+              <img src="images/church_real_2.png" alt="Eastminster Presbyterian Church – 5601 Randolph St, Hyattsville MD" loading="lazy" />
+              <div class="gallery-caption">Our Church – 5601 Randolph St, Hyattsville MD</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/church_real_1.png" alt="Eastminster Presbyterian Church entrance" loading="lazy" />
+              <div class="gallery-caption">Church Entrance</div>
+            </div>
+            <div class="gallery-item">
+              <img src="images/church_real_3.png" alt="Eastminster Presbyterian Church exterior view" loading="lazy" />
+              <div class="gallery-caption">Exterior View</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORE INFO CARDS -->
+      <section class="section info-section">
+        <div class="container">
+          <div class="info-grid">
+
+            <div class="info-card" id="worship-times-card">
+              <div class="info-card-icon">🕊️</div>
+              <h3>Worship Services</h3>
+              <ul class="info-list">
+                <li><strong>Sunday Worship</strong><br/>10:00 AM – 11:00 AM</li>
+                <li><strong>The Lord’s Supper</strong><br/>1st Sunday of the month</li>
+                <li><strong>Bible Study Fellowship</strong><br/>2nd Sunday of the month, 11:30 AM</li>
+                <li><strong>Children &amp; Youth Sunday School</strong><br/>2nd &amp; 4th Sundays during worship</li>
+                <li><strong>Grocery Collection</strong><br/>1st Sunday – for Help by Phone</li>
+              </ul>
+            </div>
+
+            <div class="info-card featured" id="contact-card">
+              <div class="info-card-icon">📍</div>
+              <h3>Find Us</h3>
+              <address class="church-address">
+                5601 Randolph Street<br/>
+                Hyattsville, MD 20784
+              </address>
+              <div class="contact-links">
+                <a href="tel:+13018641149" class="contact-link" id="phone-link">
+                  <span class="contact-link-icon">📞</span>
+                  <span>(301) 864-1149</span>
+                </a>
+                <a href="mailto:Eastminsterpresbyterianchurch1@gmail.com" class="contact-link" id="email-link">
+                  <span class="contact-link-icon">✉️</span>
+                  <span>Eastminsterpresbyterianchurch1@gmail.com</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="info-card" id="community-card">
+              <div class="info-card-icon">🤝</div>
+              <h3>Community &amp; Accessibility</h3>
+              <ul class="info-list">
+                <li><strong>Help by Phone</strong><br/>We collect groceries every 1st Sunday to support our neighbors in need.</li>
+                <li><strong>♿ Handicap Accessible</strong><br/>Our facility is fully accessible to all.</li>
+                <li>All are welcome at Eastminster — come as you are.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- MAP SECTION -->
+      <section class="section map-section">
+        <div class="container">
+          <div class="section-badge">Location</div>
+          <h2 class="section-title">Come Visit Us</h2>
+          <p class="section-lead">We are located in the heart of Hyattsville, Prince George's County, Maryland. Everyone is welcome.</p>
+          <div class="map-wrapper" id="church-map">
+            <iframe
+              title="Eastminster Presbyterian Church location map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.0!2d-76.939!3d38.958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s5601+Randolph+Street%2C+Hyattsville%2C+MD+20784!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              width="100%"
+              height="420"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <div class="directions-bar">
+            <a href="https://maps.google.com/?q=5601+Randolph+Street,+Hyattsville,+MD+20784" target="_blank" rel="noopener noreferrer" class="btn btn-primary" id="directions-btn">
+              🗺️ Get Directions
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- DENOMINATION INFO -->
+      <section class="section denomination-section">
+        <div class="container">
+          <div class="denom-card">
+            <div class="denom-icon">✝️</div>
+            <div class="denom-content">
+              <h3>Presbyterian Church (USA)</h3>
+              <p>Eastminster is a proud member congregation of the <strong>Presbyterian Church (USA)</strong> — one of the largest Protestant denominations in the United States, with a commitment to Reformed theology, local community, and justice.</p>
+              <a href="https://www.pcusa.org" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" id="pcusa-link">Learn about PCUSA →</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end #tab-home -->
+
+    <!-- === TAB 2: EVENTS & CALENDAR === -->
+    <div id="tab-events" class="tab-panel" role="tabpanel" aria-labelledby="tab-events-btn">
+
+      <section class="section events-hero-section">
+        <div class="container">
+          <div class="section-badge">Stay Connected</div>
+          <h2 class="section-title">Events &amp; Calendar</h2>
+          <p class="section-lead">Stay up to date with all upcoming services, events, and gatherings at Eastminster. Use the calendar below to see what's happening and book an appointment with our pastoral team.</p>
+
+          <!-- BOOK APPOINTMENT BUTTON + NOTICE -->
+          <div class="appointment-bar" id="appointment-bar">
+            <div class="appointment-bar-inner">
+              <div class="appointment-text">
+                <h4>🎉 Upcoming Events at Eastminster</h4>
+                <p>Check the calendar below for services, gatherings, and special events. Don't miss what's happening in our community!</p>
+              </div>
+              <a href="https://calendar.app.google/gMojsdYXsn4M1Jxk6" target="_blank" rel="noopener noreferrer" class="btn btn-accent" id="book-appointment-btn">
+                📋 Book an Appointment
+              </a>
+            </div>
+            <!-- BOOKING NOTICE inside banner -->
+            <div class="booking-notice" id="booking-notice">
+              <div class="booking-notice-icon">⚠️</div>
+              <div class="booking-notice-text">
+                <strong>Important Notice:</strong> After booking, a formal letter must be submitted to Eastminster Presbyterian Church with your request for review and approval. Appointments not accompanied by a formal letter will be removed from the calendar.
+                <a href="mailto:Eastminsterpresbyterianchurch1@gmail.com" class="notice-email-link">Submit letter to: Eastminsterpresbyterianchurch1@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- GOOGLE CALENDAR EMBED -->
+          <div class="calendar-wrapper" id="google-calendar-embed">
+            <div class="calendar-header">
+              <span class="calendar-title-icon">📅</span>
+              <span>Eastminster Church Calendar</span>
+            </div>
+            <div class="calendar-frame-wrap">
+              <!-- ✅ STEP 1: Replace the src below with your church calendar embed URL -->
+              <!-- Get it from: calendar.google.com → Settings ⚙ → your calendar → "Integrate calendar" → Copy "Embed code" src URL -->
+              <iframe
+                title="Eastminster Presbyterian Church Google Calendar"
+                src="https://calendar.google.com/calendar/embed?src=Eastminsterpresbyterianchurch1%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showPrint=0&showCalendars=0&mode=MONTH"
+                style="border:0"
+                width="100%"
+                height="600"
+                frameborder="0"
+                scrolling="no"
+                id="gcal-iframe">
+              </iframe>
+            </div>
+            <div class="calendar-note">
+              <p>📌 <em>This calendar shows upcoming church events. Click any event and select "Copy to my calendar" to save it to your personal Google Calendar.</em></p>
+              <div class="calendar-format-box" id="calendar-format-box">
+                <span class="format-label">📋 Event Title Format:</span>
+                <code class="format-code">(Eastminster Presbyterian Church) — Event Title</code>
+                <span class="format-example">Example: <em>(Eastminster Presbyterian Church) — Bible Study Fellowship</em></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADDITIONAL APPOINTMENT SECTION -->
+          <div class="appointment-details-section" id="appointment-details">
+            <div class="appt-cards-grid">
+              <div class="appt-card" id="pastoral-card">
+                <div class="appt-card-icon">🙏</div>
+                <h4>Pastoral Counseling</h4>
+                <p>Schedule a private session with our pastor for spiritual guidance, prayer, or personal support.</p>
+                <a href="https://calendar.app.google/gMojsdYXsn4M1Jxk6" target="_blank" rel="noopener noreferrer" class="btn btn-outline-sm" id="pastoral-appt-btn">Book Now</a>
+              </div>
+              <div class="appt-card" id="membership-card">
+                <div class="appt-card-icon">🏛️</div>
+                <h4>Membership Inquiry</h4>
+                <p>Interested in joining our congregation? Let's sit down and get to know each other over coffee.</p>
+                <a href="https://calendar.app.google/gMojsdYXsn4M1Jxk6" target="_blank" rel="noopener noreferrer" class="btn btn-outline-sm" id="membership-appt-btn">Book Now</a>
+              </div>
+              <div class="appt-card" id="event-card">
+                <div class="appt-card-icon">🎉</div>
+                <h4>Event Planning</h4>
+                <p>Planning a baptism, wedding, or memorial service? Schedule a meeting with our events coordinator.</p>
+                <a href="https://calendar.app.google/gMojsdYXsn4M1Jxk6" target="_blank" rel="noopener noreferrer" class="btn btn-outline-sm" id="event-appt-btn">Book Now</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- end #tab-events -->
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-logo">
+        <div class="logo-cross footer-cross">✝</div>
+        <div>
+          <div class="footer-church-name">Eastminster Presbyterian Church</div>
+          <div class="footer-pcusa">Presbyterian Church (USA)</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p>5601 Randolph Street<br/>Hyattsville, MD 20784</p>
+          <p><a href="tel:+13018641149">(301) 864-1149</a></p>
+          <p><a href="mailto:Eastminsterpresbyterianchurch1@gmail.com">Eastminsterpresbyterianchurch1@gmail.com</a></p>
+        </div>
+        <div class="footer-col">
+          <h5>Service Times</h5>
+          <p>Sunday Worship: 10:00 AM – 11:00 AM</p>
+          <p>The Lord's Supper: 1st Sunday</p>
+          <p>Bible Study Fellowship: 2nd Sunday, 11:30 AM</p>
+          <p>Children &amp; Youth Sunday School: 2nd &amp; 4th Sundays</p>
+          <p>Grocery Collection: 1st Sunday (Help by Phone)</p>
+        </div>
+        <div class="footer-col">
+          <h5>Navigate</h5>
+          <p><a href="#" onclick="switchTab('home'); scrollTo(0,0); return false;">About Us</a></p>
+          <p><a href="#" onclick="switchTab('events'); scrollTo(0,0); return false;">Events Calendar</a></p>
+          <p><a href="https://calendar.app.google/gMojsdYXsn4M1Jxk6" target="_blank" rel="noopener noreferrer">Book Appointment</a></p>
+          <p><a href="https://www.pcusa.org" target="_blank" rel="noopener noreferrer">PCUSA.org</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 Eastminster Presbyterian Church, Hyattsville, MD. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
