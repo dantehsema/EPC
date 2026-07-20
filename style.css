@@ -928,16 +928,17 @@ address {
 /* =============================================
    RESPONSIVE
    ============================================= */
+/* ── Tablet (≤960px) ─────────────────────────────────────────────── */
 @media (max-width: 960px) {
   .info-grid {
     grid-template-columns: 1fr;
-    max-width: 540px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
   .appt-cards-grid {
     grid-template-columns: 1fr;
-    max-width: 540px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
@@ -956,51 +957,108 @@ address {
     gap: 28px;
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .gallery-item.gallery-main {
-    grid-row: span 1;
-    height: 280px;
-  }
-
-  .gallery-item {
-    height: 240px;
-  }
+  /* Remove old static gallery refs */
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.gallery-main { grid-row: span 1; height: 280px; }
+  .gallery-item { height: 240px; }
 }
 
+/* ── Mobile (≤680px) ─────────────────────────────────────────────── */
 @media (max-width: 680px) {
+
+  /* --- Header --- */
   .header-inner {
     flex-wrap: wrap;
-    padding: 12px 16px;
-    gap: 12px;
+    padding: 10px 16px;
+    gap: 8px;
   }
+  .tab-nav { width: 100%; justify-content: center; }
+  .tab-btn { padding: 8px 14px; font-size: 0.82rem; }
+  .logo-name { font-size: 1rem; }
 
-  .tab-btn {
-    padding: 8px 14px;
-    font-size: 0.82rem;
+  /* --- Hero --- */
+  .hero { min-height: 70vh; }
+  .hero-title { font-size: 2rem; }
+  .hero-tagline { font-size: 0.95rem; }
+  .hero-cta-group { flex-direction: column; align-items: center; }
+  .hero-content { padding: 24px 16px; }
+
+  /* --- Sections --- */
+  .section { padding: 44px 0; }
+  .container { padding: 0 16px; }
+  .section-title { font-size: 1.6rem; }
+  .section-lead { font-size: 0.95rem; }
+
+  /* --- Info Cards --- */
+  .info-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 16px;
   }
+  .info-card { padding: 24px 18px; }
+  .info-list li { font-size: 0.88rem; }
 
-  .hero-cta-group {
-    flex-direction: column;
-    align-items: center;
+  /* --- Gallery Carousel --- */
+  .gallery-carousel-wrap {
+    grid-template-columns: 1fr;
+    grid-template-rows: 260px 80px;
+    height: auto;
+    gap: 10px;
   }
-
-  .hero-title {
-    font-size: 2.4rem;
+  .gallery-thumbs {
+    flex-direction: row;
+    height: 80px;
+    overflow-x: auto;
+    overflow-y: hidden;
   }
+  .gallery-thumb { width: 110px; height: 80px; flex-shrink: 0; }
 
+  /* --- Denomination Card --- */
+  .denom-card { padding: 24px 18px; gap: 16px; }
+
+  /* --- Appointment Bar --- */
+  .appointment-bar { padding: 20px 18px; }
   .appointment-bar-inner {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
   }
+  .appt-btn-wrap { width: 100%; }
+  .appt-btn-wrap .btn { width: 100%; justify-content: center; }
+  .format-disclaimer { text-align: left; }
 
-  .section {
-    padding: 56px 0;
+  /* --- Booking Notice --- */
+  .booking-notice { flex-direction: column; gap: 8px; }
+
+  /* --- Appointment Cards --- */
+  .appt-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 14px;
   }
+  .appt-card { padding: 22px 18px; }
+
+  /* --- Calendar Wrapper --- */
+  .calendar-wrapper { border-radius: var(--radius-sm); }
+  .calendar-frame-wrap iframe { height: 480px; }
+
+  /* --- Map --- */
+  .map-wrapper iframe { height: 300px; }
+
+  /* --- Footer --- */
+  .footer-inner { gap: 24px; }
+  .footer-col { text-align: center; }
+  .footer-bottom p { font-size: 0.78rem; }
 }
+
+/* ── Small phones (≤400px) ───────────────────────────────────────── */
+@media (max-width: 400px) {
+  .hero-title { font-size: 1.7rem; }
+  .btn { padding: 12px 20px; font-size: 0.88rem; }
+  .gallery-carousel-wrap { grid-template-rows: 220px 75px; }
+}
+
 
 /* ── Booking Notice ────────────────────────────────────────────────── */
 .booking-notice {
@@ -1008,8 +1066,8 @@ address {
   align-items: flex-start;
   gap: 1rem;
   border-top: 1px solid rgba(201, 168, 76, 0.35);
-  margin-top: 20px;
-  padding-top: 20px;
+  margin-top: 10px;
+  padding-top: 12px;
   text-align: left;
 }
 
@@ -1092,6 +1150,30 @@ address {
 .format-example {
   font-size: 0.8rem;
   color: var(--text-mid);
+}
+
+.format-inline {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  background: rgba(201,168,76,0.12);
+  color: var(--navy);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.appt-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.format-disclaimer {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  font-style: italic;
 }
 
 /* ── Gallery Carousel ───────────────────────────────────────────────── */
