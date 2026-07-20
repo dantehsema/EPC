@@ -98,7 +98,97 @@ function switchTab(tab) {
 //  INIT
 // =============================================
 document.addEventListener('DOMContentLoaded', function () {
-  // Ensure home tab is active by default
   switchTab('home');
+  galleryInit();
   console.log('Eastminster Presbyterian Church website loaded.');
 });
+
+// =============================================
+//  GALLERY CAROUSEL  (global scope)
+// =============================================
+var _gallery = {
+  current: 0,
+  timer: null,
+  INTERVAL: 4000,
+  slides: []
+};
+
+function galleryInit() {
+  var thumbEls = document.querySelectorAll('.gallery-thumb');
+  var mainImg  = document.getElementById('gallery-main-img');
+  if (!thumbEls.length || !mainImg) return;
+
+  _gallery.slides = Array.from(thumbEls).map(function(th) {
+    return { src: th.getAttribute('data-src'), caption: th.getAttribute('data-caption'), el: th };
+  });
+
+  // Build dots
+  var dotsWrap = document.getElementById('gallery-dots');
+  if (dotsWrap) {
+    _gallery.slides.forEach(function(_, i) {
+      var dot = document.createElement('button');
+      dot.className   = 'gallery-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Photo ' + (i + 1));
+      dot.onclick     = function() { galleryGo(i); };
+      dotsWrap.appendChild(dot);
+    });
+  }
+
+  // Start auto-cycle
+  galleryStartAuto();
+}
+
+function galleryGo(index) {
+  var g = _gallery;
+  if (!g.slides.length) return;
+  if (index === g.current) return;
+
+  var mainImg   = document.getElementById('gallery-main-img');
+  var captionEl = document.getElementById('gallery-main-caption');
+  if (!mainImg) return;
+
+  // Fade out → swap → fade in
+  mainImg.style.opacity = '0';
+  setTimeout(function() {
+    mainImg.src           = g.slides[index].src;
+    mainImg.alt           = g.slides[index].caption;
+    if (captionEl) captionEl.textContent = g.slides[index].caption;
+
+    // Active thumb
+    g.slides.forEach(function(s, i) { s.el.classList.toggle('active', i === index); });
+
+    // Active dot
+    var dots = document.querySelectorAll('.gallery-dot');
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
+
+    g.current = index;
+    mainImg.style.opacity = '1';
+  }, 280);
+}
+
+function galleryPrev() {
+  var g = _gallery;
+  galleryStopAuto();
+  galleryGo((g.current - 1 + g.slides.length) % g.slides.length);
+  galleryStartAuto();
+}
+
+function galleryNext() {
+  var g = _gallery;
+  galleryStopAuto();
+  galleryGo((g.current + 1) % g.slides.length);
+  galleryStartAuto();
+}
+
+function galleryStartAuto() {
+  galleryStopAuto();
+  _gallery.timer = setInterval(function() {
+    var g = _gallery;
+    galleryGo((g.current + 1) % g.slides.length);
+  }, _gallery.INTERVAL);
+}
+
+function galleryStopAuto() {
+  clearInterval(_gallery.timer);
+  _gallery.timer = null;
+}

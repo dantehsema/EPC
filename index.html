@@ -68,25 +68,44 @@
         </div>
       </section>
 
-      <!-- IMAGE GALLERY -->
+      <!-- IMAGE GALLERY CAROUSEL -->
       <section class="section gallery-section">
         <div class="container">
-          <div class="gallery-grid">
-            <div class="gallery-item gallery-main">
-              <img src="images/church_real_2.png" alt="Eastminster Presbyterian Church – 5601 Randolph St, Hyattsville MD" loading="lazy" />
-              <div class="gallery-caption">Our Church – 5601 Randolph St, Hyattsville MD</div>
+          <div class="gallery-carousel-wrap">
+
+            <!-- Large featured image -->
+            <div class="gallery-featured" id="gallery-featured">
+              <img src="images/church_real_4.jpg" alt="Sanctuary Interior" id="gallery-main-img" />
+              <div class="gallery-featured-caption" id="gallery-main-caption">Sanctuary Interior</div>
+              <!-- Prev / Next arrows -->
+              <button class="gallery-arrow gallery-prev" id="gallery-prev" aria-label="Previous" onclick="galleryPrev()">&#8592;</button>
+              <button class="gallery-arrow gallery-next" id="gallery-next" aria-label="Next" onclick="galleryNext()">&#8594;</button>
+              <!-- Dot indicators -->
+              <div class="gallery-dots" id="gallery-dots"></div>
             </div>
-            <div class="gallery-item">
-              <img src="images/church_real_1.png" alt="Eastminster Presbyterian Church entrance" loading="lazy" />
-              <div class="gallery-caption">Church Entrance</div>
+
+            <!-- Thumbnail strip -->
+            <div class="gallery-thumbs" id="gallery-thumbs">
+              <div class="gallery-thumb active" data-index="0" data-src="images/church_real_4.jpg" data-caption="Sanctuary Interior" onclick="galleryGo(0)">
+                <img src="images/church_real_4.jpg" alt="Sanctuary Interior" />
+              </div>
+              <div class="gallery-thumb" data-index="1" data-src="images/church_real_2.png" data-caption="Our Church – 5601 Randolph St" onclick="galleryGo(1)">
+                <img src="images/church_real_2.png" alt="Church Exterior" />
+              </div>
+              <div class="gallery-thumb" data-index="2" data-src="images/church_real_1.png" data-caption="Church Entrance" onclick="galleryGo(2)">
+                <img src="images/church_real_1.png" alt="Church Entrance" />
+              </div>
+              <div class="gallery-thumb" data-index="3" data-src="images/church_real_3.png" data-caption="Exterior View" onclick="galleryGo(3)">
+                <img src="images/church_real_3.png" alt="Exterior View" />
+              </div>
             </div>
-            <div class="gallery-item">
-              <img src="images/church_real_3.png" alt="Eastminster Presbyterian Church exterior view" loading="lazy" />
-              <div class="gallery-caption">Exterior View</div>
-            </div>
+
           </div>
         </div>
       </section>
+
+
+
 
       <!-- CORE INFO CARDS -->
       <section class="section info-section">
@@ -312,6 +331,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
