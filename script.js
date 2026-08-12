@@ -113,18 +113,62 @@ var _gallery = {
   slides: []
 };
 
-function galleryInit() {
-  var thumbEls = document.querySelectorAll('.gallery-thumb');
-  var mainImg  = document.getElementById('gallery-main-img');
-  if (!thumbEls.length || !mainImg) return;
+// Default photos (fallback if no admin data saved)
+var _defaultGalleryPhotos = [
+  { src: 'images/church_real_4.jpg', caption: 'Sanctuary Interior' },
+  { src: 'images/church_real_2.png', caption: 'Our Church – 5601 Randolph St' },
+  { src: 'images/church_real_1.png', caption: 'Church Entrance' },
+  { src: 'images/church_real_3.png', caption: 'Exterior View' }
+];
 
-  _gallery.slides = Array.from(thumbEls).map(function(th) {
+function galleryLoadPhotos() {
+  try {
+    var saved = localStorage.getItem('epc_gallery_photos');
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch(e) {}
+  return _defaultGalleryPhotos;
+}
+
+function galleryInit() {
+  var mainImg   = document.getElementById('gallery-main-img');
+  var thumbsEl  = document.getElementById('gallery-thumbs');
+  var dotsWrap  = document.getElementById('gallery-dots');
+  var captionEl = document.getElementById('gallery-main-caption');
+  if (!mainImg || !thumbsEl) return;
+
+  var photos = galleryLoadPhotos();
+
+  // Rebuild thumbnail strip from data
+  thumbsEl.innerHTML = '';
+  photos.forEach(function(p, i) {
+    var div = document.createElement('div');
+    div.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
+    div.setAttribute('data-index', i);
+    div.setAttribute('data-src', p.src);
+    div.setAttribute('data-caption', p.caption || '');
+    div.onclick = function() { galleryGo(i); };
+    var img = document.createElement('img');
+    img.src = p.src;
+    img.alt = p.caption || '';
+    div.appendChild(img);
+    thumbsEl.appendChild(div);
+  });
+
+  // Set first photo
+  mainImg.src = photos[0].src;
+  mainImg.alt = photos[0].caption || '';
+  if (captionEl) captionEl.textContent = photos[0].caption || '';
+
+  _gallery.slides = Array.from(thumbsEl.querySelectorAll('.gallery-thumb')).map(function(th) {
     return { src: th.getAttribute('data-src'), caption: th.getAttribute('data-caption'), el: th };
   });
 
   // Build dots
-  var dotsWrap = document.getElementById('gallery-dots');
   if (dotsWrap) {
+    dotsWrap.innerHTML = '';
     _gallery.slides.forEach(function(_, i) {
       var dot = document.createElement('button');
       dot.className   = 'gallery-dot' + (i === 0 ? ' active' : '');

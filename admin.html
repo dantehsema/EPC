@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EPC Admin – Photo Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --surface:   #161b22;
+      --surface2:  #21262d;
+      --border:    #30363d;
+      --accent:    #5a8dee;
+      --accent2:   #7c5cbf;
+      --danger:    #e05252;
+      --success:   #3fb950;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --radius:    12px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 60% 40%, #1a1f3c 0%, #0d1117 70%);
+    }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .login-cross {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 12px #5a8dee88);
+    }
+    .login-card h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+    .login-card p  { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
+
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .pin-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pin-dot.filled { background: var(--accent); transform: scale(1.2); }
+
+    .pin-pad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .pin-key {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 16px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .pin-key:hover  { background: #2d333b; }
+    .pin-key:active { transform: scale(0.95); }
+    .pin-key.danger { color: var(--danger); }
+
+    .login-error {
+      color: var(--danger);
+      font-size: 0.82rem;
+      height: 20px;
+      transition: opacity 0.3s;
+    }
+
+    /* ── ADMIN SHELL ── */
+    #admin-shell { display: none; }
+
+    .admin-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .admin-logo { display: flex; align-items: center; gap: 10px; }
+    .admin-logo .cross { font-size: 1.3rem; }
+    .admin-logo .title { font-size: 1rem; font-weight: 700; }
+    .admin-logo .sub   { font-size: 0.72rem; color: var(--muted); }
+
+    .header-actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      border: none; cursor: pointer; border-radius: 8px;
+      font-family: inherit; font-weight: 600; font-size: 0.82rem;
+      padding: 8px 16px; transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #4a7de0; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-success:hover { background: #2da043; }
+    .btn-danger  { background: var(--danger); color: #fff; }
+    .btn-danger:hover  { background: #c94444; }
+    .btn-ghost   { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: #2d333b; }
+
+    .admin-body { padding: 32px 28px; max-width: 1100px; margin: 0 auto; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .stat-card .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-card .value { font-size: 1.8rem; font-weight: 700; margin-top: 4px; }
+    .stat-card .value.accent { color: var(--accent); }
+    .stat-card .value.success { color: var(--success); }
+
+    /* ── UPLOAD ZONE ── */
+    .upload-section { margin-bottom: 32px; }
+    .section-heading {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section-heading .badge {
+      background: var(--accent); color: #fff;
+      font-size: 0.68rem; padding: 2px 8px; border-radius: 20px;
+    }
+
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      background: var(--surface);
+    }
+    .drop-zone:hover, .drop-zone.drag-over {
+      border-color: var(--accent);
+      background: rgba(90, 141, 238, 0.06);
+    }
+    .drop-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .drop-zone h3 { font-size: 1rem; font-weight: 600; }
+    .drop-zone p  { color: var(--muted); font-size: 0.82rem; margin-top: 4px; }
+    #photo-file-input { display: none; }
+
+    /* ── PHOTO GRID ── */
+    .photos-section { margin-bottom: 32px; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .photo-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    .photo-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .photo-card.is-default { border-color: var(--accent2); }
+
+    .photo-card img {
+      width: 100%; height: 160px; object-fit: cover;
+      display: block;
+    }
+    .photo-card-body { padding: 12px; }
+
+    .photo-badge {
+      position: absolute; top: 8px; left: 8px;
+      background: rgba(0,0,0,0.7);
+      color: #fff; font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 20px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .photo-badge.default { background: rgba(124,92,191,0.85); }
+    .photo-badge.custom  { background: rgba(63,185,80,0.85); }
+
+    .order-badge {
+      position: absolute; top: 8px; right: 8px;
+      background: rgba(0,0,0,0.65);
+      color: #fff; font-size: 0.72rem; font-weight: 700;
+      width: 26px; height: 26px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .caption-input {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.8rem;
+      padding: 7px 10px;
+      margin-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+    .caption-input:focus { outline: none; border-color: var(--accent); }
+
+    .photo-card-actions { display: flex; gap: 6px; }
+    .photo-card-actions .btn { flex: 1; font-size: 0.75rem; padding: 6px 10px; }
+
+    .order-controls { display: flex; gap: 4px; }
+    .order-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 5px 8px;
+      transition: background 0.15s;
+    }
+    .order-btn:hover { background: #2d333b; }
+    .order-btn:disabled { opacity: 0.3; cursor: default; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--success);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      font-size: 0.85rem; font-weight: 500;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transform: translateY(80px); opacity: 0;
+      transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), opacity 0.3s;
+      z-index: 9999;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.error { border-left-color: var(--danger); }
+
+    /* ── PREVIEW MODAL ── */
+    #preview-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+    #preview-modal.open { display: flex; }
+    #preview-modal img {
+      max-width: 90vw; max-height: 85vh;
+      border-radius: var(--radius);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+    }
+    #preview-modal .close-btn {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.1);
+      border: none; color: #fff; font-size: 1.4rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+
+    .empty-state {
+      text-align: center; padding: 48px 24px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+    .empty-state .icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+    @media (max-width: 600px) {
+      .admin-body { padding: 20px 14px; }
+      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-cross">✝</div>
+    <h1>EPC Admin</h1>
+    <p>Enter your 4-digit PIN to continue</p>
+
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinPress('1')">1</button>
+      <button class="pin-key" onclick="pinPress('2')">2</button>
+      <button class="pin-key" onclick="pinPress('3')">3</button>
+      <button class="pin-key" onclick="pinPress('4')">4</button>
+      <button class="pin-key" onclick="pinPress('5')">5</button>
+      <button class="pin-key" onclick="pinPress('6')">6</button>
+      <button class="pin-key" onclick="pinPress('7')">7</button>
+      <button class="pin-key" onclick="pinPress('8')">8</button>
+      <button class="pin-key" onclick="pinPress('9')">9</button>
+      <button class="pin-key danger" onclick="pinClear()">✕</button>
+      <button class="pin-key" onclick="pinPress('0')">0</button>
+      <button class="pin-key" onclick="pinBack()">⌫</button>
+    </div>
+
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN SHELL ══════════════ -->
+<div id="admin-shell">
+  <header class="admin-header">
+    <div class="admin-logo">
+      <span class="cross">✝</span>
+      <div>
+        <div class="title">EPC Photo Admin</div>
+        <div class="sub">Eastminster Presbyterian Church</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-success" onclick="saveAll()" id="save-btn">💾 Save Changes</button>
+      <button class="btn btn-ghost" onclick="previewSite()">🌐 Preview Site</button>
+      <button class="btn btn-ghost" onclick="logout()">Sign Out</button>
+    </div>
+  </header>
+
+  <div class="admin-body">
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-card">
+        <div class="label">Total Photos</div>
+        <div class="value accent" id="stat-total">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Custom Uploads</div>
+        <div class="value success" id="stat-custom">0</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Default Photos</div>
+        <div class="value" id="stat-default">0</div>
+      </div>
+    </div>
+
+    <!-- Upload -->
+    <div class="upload-section">
+      <div class="section-heading">
+        📸 Upload Photos
+        <span class="badge">JPG, PNG, WebP, GIF</span>
+      </div>
+      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('photo-file-input').click()">
+        <div class="drop-icon">☁️</div>
+        <h3>Click or drag &amp; drop photos here</h3>
+        <p>Multiple files supported • Photos appear in the church website carousel</p>
+      </div>
+      <input type="file" id="photo-file-input" accept="image/*" multiple />
+    </div>
+
+    <!-- Photos grid -->
+    <div class="photos-section">
+      <div class="section-heading" id="photos-heading">
+        🖼️ Gallery Photos
+      </div>
+      <div class="photo-grid" id="photo-grid">
+        <div class="empty-state">
+          <div class="icon">📷</div>
+          <div>No photos yet. Upload some above!</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Preview Modal -->
+<div id="preview-modal">
+  <button class="close-btn" onclick="closePreview()">✕</button>
+  <img id="preview-img" src="" alt="Preview" />
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+//  CONFIG
+// ══════════════════════════════════════════
+const ADMIN_PIN = '1234'; // Change this PIN
+const STORAGE_KEY = 'epc_gallery_photos';
+
+// Default photos (the ones already in index.html)
+const DEFAULT_PHOTOS = [
+  { id: 'def_0', src: 'images/church_real_4.jpg',  caption: 'Sanctuary Interior', isDefault: true },
+  { id: 'def_1', src: 'images/church_real_2.png',  caption: 'Our Church – 5601 Randolph St', isDefault: true },
+  { id: 'def_2', src: 'images/church_real_1.png',  caption: 'Church Entrance', isDefault: true },
+  { id: 'def_3', src: 'images/church_real_3.png',  caption: 'Exterior View', isDefault: true },
+];
+
+// ══════════════════════════════════════════
+//  PIN LOGIN
+// ══════════════════════════════════════════
+let _pin = '';
+
+function pinPress(d) {
+  if (_pin.length >= 4) return;
+  _pin += d;
+  updateDots();
+  if (_pin.length === 4) setTimeout(checkPin, 200);
+}
+function pinBack() { _pin = _pin.slice(0, -1); updateDots(); }
+function pinClear() { _pin = ''; updateDots(); clearError(); }
+
+function updateDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('d' + i).classList.toggle('filled', i < _pin.length);
+  }
+}
+
+function checkPin() {
+  if (_pin === ADMIN_PIN) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').style.display = 'block';
+    initAdmin();
+  } else {
+    showError('Incorrect PIN. Try again.');
+    _pin = '';
+    updateDots();
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('login-error');
+  el.textContent = msg;
+  el.style.opacity = '1';
+  setTimeout(() => { el.style.opacity = '0'; }, 2000);
+}
+function clearError() { document.getElementById('login-error').textContent = ''; }
+
+function logout() {
+  _pin = '';
+  updateDots();
+  document.getElementById('admin-shell').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+// Keyboard support for PIN
+document.addEventListener('keydown', e => {
+  if (document.getElementById('login-screen').style.display === 'none') return;
+  if (e.key >= '0' && e.key <= '9') pinPress(e.key);
+  else if (e.key === 'Backspace') pinBack();
+  else if (e.key === 'Escape') pinClear();
+});
+
+// ══════════════════════════════════════════
+//  PHOTO DATA
+// ══════════════════════════════════════════
+let photos = []; // array of { id, src, caption, isDefault }
+
+function loadPhotos() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      photos = JSON.parse(saved);
+    } else {
+      photos = [...DEFAULT_PHOTOS];
+    }
+  } catch(e) {
+    photos = [...DEFAULT_PHOTOS];
+  }
+}
+
+function savePhotos() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(photos));
+    return true;
+  } catch(e) {
+    console.error('Save failed:', e);
+    if (e.name === 'QuotaExceededError' || e.code === 22) {
+      alert('⚠️ Storage full! Your uploaded photos are too large to save in the browser.\n\nTip: Copy the image files directly into the /images/ folder instead, then reference them by filename.');
+    } else {
+      alert('Save failed: ' + e.message);
+    }
+    return false;
+  }
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+function initAdmin() {
+  loadPhotos();
+  renderGrid();
+  setupDrop();
+}
+
+// ══════════════════════════════════════════
+//  RENDER
+// ══════════════════════════════════════════
+function renderGrid() {
+  const grid = document.getElementById('photo-grid');
+  const customCount = photos.filter(p => !p.isDefault).length;
+  const defaultCount = photos.filter(p => p.isDefault).length;
+
+  document.getElementById('stat-total').textContent   = photos.length;
+  document.getElementById('stat-custom').textContent  = customCount;
+  document.getElementById('stat-default').textContent = defaultCount;
+
+  if (photos.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><div class="icon">📷</div><div>No photos yet. Upload some above!</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = photos.map((p, i) => `
+    <div class="photo-card ${p.isDefault ? 'is-default' : ''}" id="card-${p.id}">
+      <img src="${p.src}" alt="${p.caption}" onclick="openPreview('${p.src}')" style="cursor:zoom-in" />
+      <span class="photo-badge ${p.isDefault ? 'default' : 'custom'}">${p.isDefault ? 'Default' : 'Custom'}</span>
+      <span class="order-badge">${i + 1}</span>
+      <div class="photo-card-body">
+        <input
+          class="caption-input"
+          type="text"
+          value="${escHtml(p.caption)}"
+          placeholder="Photo caption…"
+          onchange="updateCaption('${p.id}', this.value)"
+        />
+        <div class="photo-card-actions">
+          <div class="order-controls">
+            <button class="order-btn" onclick="moveUp(${i})" ${i === 0 ? 'disabled' : ''} title="Move left">◀</button>
+            <button class="order-btn" onclick="moveDown(${i})" ${i === photos.length - 1 ? 'disabled' : ''} title="Move right">▶</button>
+          </div>
+          <button class="btn btn-danger" onclick="removePhoto('${p.id}')">🗑</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function escHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ══════════════════════════════════════════
+//  ACTIONS
+// ══════════════════════════════════════════
+function updateCaption(id, val) {
+  const p = photos.find(x => x.id === id);
+  if (p) p.caption = val;
+}
+
+function removePhoto(id) {
+  photos = photos.filter(p => p.id !== id);
+  renderGrid();
+  toast('Photo removed. Click Save to apply.', false);
+}
+
+function moveUp(i) {
+  if (i === 0) return;
+  [photos[i-1], photos[i]] = [photos[i], photos[i-1]];
+  renderGrid();
+}
+
+function moveDown(i) {
+  if (i >= photos.length - 1) return;
+  [photos[i], photos[i+1]] = [photos[i+1], photos[i]];
+  renderGrid();
+}
+
+function saveAll() {
+  const ok = savePhotos();
+  if (ok) {
+    toast('✅ Saved! Reload the main site to see changes.', false);
+    // Belt-and-suspenders: also alert so it's unmissable
+    setTimeout(() => alert('✅ Saved! Open index.html to see your changes.'), 100);
+  }
+}
+
+function previewSite() {
+  savePhotos();
+  var w = window.open('index.html', '_blank');
+  if (!w || w.closed || typeof w.closed === 'undefined') {
+    // Popup was blocked — navigate directly instead
+    window.location.href = 'index.html';
+  }
+}
+
+// ══════════════════════════════════════════
+//  UPLOAD
+// ══════════════════════════════════════════
+function setupDrop() {
+  const zone  = document.getElementById('drop-zone');
+  const input = document.getElementById('photo-file-input');
+
+  input.addEventListener('change', e => handleFiles(e.target.files));
+
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    handleFiles(e.dataTransfer.files);
+  });
+}
+
+function compressImage(file, callback) {
+  const MAX_W = 1200;
+  const QUALITY = 0.82;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = img.width > MAX_W ? MAX_W / img.width : 1;
+      const canvas = document.createElement('canvas');
+      canvas.width  = Math.round(img.width  * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      callback(canvas.toDataURL('image/jpeg', QUALITY));
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleFiles(files) {
+  const accepted = Array.from(files).filter(f => f.type.startsWith('image/'));
+  if (!accepted.length) { toast('Please select image files only.', true); return; }
+
+  let loaded = 0;
+  accepted.forEach(file => {
+    compressImage(file, dataUrl => {
+      photos.push({
+        id: 'custom_' + Date.now() + '_' + Math.random().toString(36).slice(2),
+        src: dataUrl,
+        caption: file.name.replace(/\.[^.]+$/, '').replace(/[_-]/g, ' '),
+        isDefault: false
+      });
+      loaded++;
+      if (loaded === accepted.length) {
+        renderGrid();
+        toast('✅ ' + loaded + ' photo' + (loaded > 1 ? 's' : '') + ' added! Click Save to keep them.', false);
+      }
+    });
+  });
+}
+
+// ══════════════════════════════════════════
+//  PREVIEW MODAL
+// ══════════════════════════════════════════
+function openPreview(src) {
+  document.getElementById('preview-img').src = src;
+  document.getElementById('preview-modal').classList.add('open');
+}
+function closePreview() {
+  document.getElementById('preview-modal').classList.remove('open');
+}
+document.getElementById('preview-modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('preview-modal')) closePreview();
+});
+
+// ══════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════
+let _toastTimer;
+function toast(msg, isError = false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast' + (isError ? ' error' : '');
+  clearTimeout(_toastTimer);
+  setTimeout(() => el.classList.add('show'), 10);
+  _toastTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+</script>
+</body>
+</html>
