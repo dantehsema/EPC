@@ -868,6 +868,34 @@ address {
   color: var(--navy);
 }
 
+.cal-legend {
+  display: flex;
+  gap: 24px;
+  padding: 10px 24px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+
+.cal-legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.cal-legend-dot.booked    { background: #4285f4; }
+.cal-legend-dot.available { background: #ffffff; border: 1px solid #ccc; }
+
+
 .calendar-frame-wrap {
   overflow: hidden;
   width: 100%;
