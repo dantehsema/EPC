@@ -240,11 +240,52 @@
             </div>
           </div>
 
-          <!-- GOOGLE CALENDAR EMBED -->
+          <!-- AVAILABILITY SCHEDULE -->
+          <div class="avail-wrapper" id="avail-wrapper">
+            <div class="avail-header">
+              <span>🗓️ Available Booking Times</span>
+              <span class="avail-sub">Times when the church is open for appointments &amp; events</span>
+            </div>
+            <div class="avail-grid">
+              <div class="avail-row avail-row-header">
+                <div>Day</div>
+                <div>Available Window</div>
+                <div>Notes</div>
+              </div>
+              <div class="avail-row">
+                <div class="avail-day">Sunday</div>
+                <div class="avail-time">11:15 AM – 3:00 PM</div>
+                <div class="avail-note">After worship service</div>
+              </div>
+              <div class="avail-row">
+                <div class="avail-day">Monday</div>
+                <div class="avail-time avail-closed">Closed</div>
+                <div class="avail-note">—</div>
+              </div>
+              <div class="avail-row">
+                <div class="avail-day">Tuesday – Thursday</div>
+                <div class="avail-time">10:00 AM – 4:00 PM</div>
+                <div class="avail-note">By appointment only</div>
+              </div>
+              <div class="avail-row">
+                <div class="avail-day">Friday</div>
+                <div class="avail-time">10:00 AM – 2:00 PM</div>
+                <div class="avail-note">By appointment only</div>
+              </div>
+              <div class="avail-row">
+                <div class="avail-day">Saturday</div>
+                <div class="avail-time">9:00 AM – 5:00 PM</div>
+                <div class="avail-note">Events &amp; ceremonies</div>
+              </div>
+            </div>
+            <div class="avail-footer">⚠️ All times subject to change. Existing events on the calendar below take priority — always check before submitting your request.</div>
+          </div>
+
+          <!-- GOOGLE CALENDAR (existing booked events) -->
           <div class="calendar-wrapper" id="google-calendar-embed">
             <div class="calendar-header">
               <span class="calendar-title-icon">📅</span>
-              <span>Eastminster Church Calendar</span>
+              <span>Already Booked — Church Calendar</span>
               <div class="cal-view-toggle" id="cal-view-toggle">
                 <button class="cal-view-btn" id="btn-week" onclick="setCalView('week')" aria-pressed="true">Week</button>
                 <button class="cal-view-btn" id="btn-month" onclick="setCalView('month')">Month</button>
@@ -256,14 +297,14 @@
                 src="https://calendar.google.com/calendar/embed?src=Eastminsterpresbyterianchurch1%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showPrint=0&showCalendars=0&mode=WEEK"
                 style="border:0"
                 width="100%"
-                height="600"
+                height="500"
                 frameborder="0"
                 scrolling="no"
                 id="gcal-iframe">
               </iframe>
             </div>
             <div class="calendar-note">
-              <p>📌 <em><strong>Empty time slots = available.</strong> Use Week view to see open hours. Find a date that works, then submit your letter in Step 2 above before reserving.</em></p>
+              <p>📌 <em>Events shown here are <strong>already reserved</strong>. Avoid requesting these times.</em></p>
             </div>
           </div>
 
@@ -339,6 +380,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

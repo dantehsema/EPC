@@ -709,6 +709,66 @@ address {
   margin-bottom: 36px;
 }
 
+/* ── Availability Schedule ─────────────────────────────────────────── */
+.avail-wrapper {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 32px;
+  text-align: left;
+}
+.avail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 16px 24px;
+  background: linear-gradient(90deg, var(--navy), var(--navy-mid));
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+.avail-sub {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+}
+.avail-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.4fr 1.6fr;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  transition: background 0.15s;
+}
+.avail-row:last-child { border-bottom: none; }
+.avail-row:not(.avail-row-header):hover { background: var(--cream); }
+.avail-row-header {
+  background: var(--cream);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mid);
+}
+.avail-day  { font-weight: 600; color: var(--navy);    font-size: 0.93rem; }
+.avail-time { font-weight: 600; color: #2e7d32;        font-size: 0.93rem; }
+.avail-closed { color: #b71c1c; }
+.avail-note { font-size: 0.85rem; color: var(--text-mid); font-style: italic; }
+.avail-footer {
+  padding: 12px 24px;
+  background: #fff8e1;
+  border-top: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: #7a6020;
+}
+
+
 /* Appointment Banner */
 .appointment-bar {
   width: 100%;
