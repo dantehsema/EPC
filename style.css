@@ -1076,6 +1076,89 @@ address {
 }
 
 
+/* ── Process Banner (How to Request) ──────────────────────────────── */
+.process-banner {
+  width: 100%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: var(--radius-md);
+  padding: 28px 36px;
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-md);
+  text-align: left;
+}
+
+.process-banner-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+}
+
+.process-steps {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.process-step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+}
+
+.process-step-body strong {
+  display: block;
+  color: var(--white);
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.process-step-body p {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.process-step-body .btn {
+  margin-top: 4px;
+}
+
+.process-step-arrow {
+  color: var(--gold);
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .process-steps { flex-direction: column; gap: 20px; }
+  .process-step-arrow { display: none; }
+  .process-banner { padding: 20px 18px; }
+}
+
 /* ── Booking Notice ────────────────────────────────────────────────── */
 .booking-notice {
   display: flex;
