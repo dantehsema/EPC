@@ -27,12 +27,15 @@ function switchTab(tab) {
     targetBtn.setAttribute('aria-selected', 'true');
   }
 
-  // Update hero CTA button active gold state
+  // True toggle — active button goes gold, other one dims
   var heroBtnHome   = document.getElementById('hero-btn-home');
   var heroBtnEvents = document.getElementById('hero-btn-events');
-  if (heroBtnHome)   heroBtnHome.classList.toggle('active',   tab === 'home');
-  if (heroBtnEvents) heroBtnEvents.classList.toggle('active', tab === 'events');
-
+  if (heroBtnHome) {
+    heroBtnHome.classList.toggle('inactive', tab !== 'home');
+  }
+  if (heroBtnEvents) {
+    heroBtnEvents.classList.toggle('active', tab === 'events');
+  }
   // Scroll to just below the header
   const header = document.querySelector('.site-header');
   const offset = header ? header.offsetHeight : 70;

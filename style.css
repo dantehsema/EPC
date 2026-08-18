@@ -116,6 +116,18 @@ address {
   color: var(--deep-navy);
 }
 
+.btn-primary.inactive {
+  background: transparent !important;
+  color: rgba(255,255,255,0.7) !important;
+  border: 2px solid rgba(255,255,255,0.4) !important;
+  box-shadow: none !important;
+}
+
+.btn-primary.inactive:hover {
+  background: rgba(255,255,255,0.08) !important;
+  color: var(--white) !important;
+}
+
 .btn-outline {
   background: transparent;
   color: var(--white);
@@ -1078,6 +1090,7 @@ address {
   .tab-nav { width: 100%; justify-content: center; }
   .tab-btn { padding: 8px 14px; font-size: 0.82rem; }
   .logo-name { font-size: 1rem; }
+
 
   /* --- Hero --- */
   .hero { min-height: 70vh; }
