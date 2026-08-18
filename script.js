@@ -28,12 +28,10 @@ function switchTab(tab) {
   }
 
   // Update hero CTA button active gold state
-  const heroBtns = document.querySelectorAll('.hero-cta-group .btn');
-  heroBtns.forEach(b => b.classList.remove('active'));
-  const heroMap = { home: 0, events: 1 };
-  if (heroBtns[heroMap[tab]] !== undefined) {
-    heroBtns[heroMap[tab]].classList.add('active');
-  }
+  var heroBtnHome   = document.getElementById('hero-btn-home');
+  var heroBtnEvents = document.getElementById('hero-btn-events');
+  if (heroBtnHome)   heroBtnHome.classList.toggle('active',   tab === 'home');
+  if (heroBtnEvents) heroBtnEvents.classList.toggle('active', tab === 'events');
 
   // Scroll to just below the header
   const header = document.querySelector('.site-header');

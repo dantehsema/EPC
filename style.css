@@ -130,10 +130,10 @@ address {
 }
 
 .btn-outline.active {
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  color: var(--deep-navy);
-  border-color: var(--gold);
-  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.45);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important;
+  color: var(--deep-navy) !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.5) !important;
 }
 
 .btn-accent {
