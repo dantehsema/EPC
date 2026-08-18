@@ -27,6 +27,14 @@ function switchTab(tab) {
     targetBtn.setAttribute('aria-selected', 'true');
   }
 
+  // Update hero CTA button active gold state
+  const heroBtns = document.querySelectorAll('.hero-cta-group .btn');
+  heroBtns.forEach(b => b.classList.remove('active'));
+  const heroMap = { home: 0, events: 1 };
+  if (heroBtns[heroMap[tab]] !== undefined) {
+    heroBtns[heroMap[tab]].classList.add('active');
+  }
+
   // Scroll to just below the header
   const header = document.querySelector('.site-header');
   const offset = header ? header.offsetHeight : 70;
@@ -93,6 +101,21 @@ function switchTab(tab) {
   const query = encodeURIComponent('5601 Randolph Street, Hyattsville, MD 20784');
   mapIframe.src = `https://maps.google.com/maps?q=${query}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 })();
+
+// =============================================
+//  CALENDAR VIEW TOGGLE
+// =============================================
+var CAL_BASE = 'https://calendar.google.com/calendar/embed?src=Eastminsterpresbyterianchurch1%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showPrint=0&showCalendars=0&mode=';
+
+function setCalView(mode) {
+  var iframe = document.getElementById('gcal-iframe');
+  if (iframe) iframe.src = CAL_BASE + mode.toUpperCase();
+
+  var btnWeek  = document.getElementById('btn-week');
+  var btnMonth = document.getElementById('btn-month');
+  if (btnWeek)  btnWeek.setAttribute('aria-pressed',  mode === 'week'  ? 'true' : 'false');
+  if (btnMonth) btnMonth.setAttribute('aria-pressed', mode === 'month' ? 'true' : 'false');
+}
 
 // =============================================
 //  INIT
