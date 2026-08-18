@@ -240,38 +240,34 @@
             </div>
           </div>
 
-          <!-- GOOGLE CALENDAR -->
+          <!-- GOOGLE APPOINTMENT SCHEDULE (shows available time bubbles) -->
           <div class="calendar-wrapper" id="google-calendar-embed">
             <div class="calendar-header">
               <span class="calendar-title-icon">📅</span>
-              <span>Church Calendar — Check Availability</span>
-              <div class="cal-view-toggle" id="cal-view-toggle">
-                <button class="cal-view-btn" id="btn-week" onclick="setCalView('week')" aria-pressed="true">Week</button>
-                <button class="cal-view-btn" id="btn-month" onclick="setCalView('month')">Month</button>
-              </div>
+              <span>Church Availability — Open Time Slots</span>
             </div>
             <div class="cal-legend">
               <div class="cal-legend-item">
-                <span class="cal-legend-dot booked"></span> Booked / Unavailable
+                <span class="cal-legend-dot booked"></span> Already Booked
               </div>
               <div class="cal-legend-item">
-                <span class="cal-legend-dot available"></span> Available (no events)
+                <span class="cal-legend-dot available"></span> Available Slot
               </div>
             </div>
             <div class="calendar-frame-wrap">
               <iframe
-                title="Eastminster Presbyterian Church Google Calendar"
-                src="https://calendar.google.com/calendar/embed?src=Eastminsterpresbyterianchurch1%40gmail.com&ctz=America%2FNew_York&showTitle=0&showNav=1&showPrint=0&showCalendars=0&mode=WEEK"
+                title="Eastminster Presbyterian Church Appointment Availability"
+                src="https://calendar.app.google/gMojsdYXsn4M1Jxk6"
                 style="border:0"
                 width="100%"
-                height="600"
+                height="650"
                 frameborder="0"
-                scrolling="no"
+                scrolling="yes"
                 id="gcal-iframe">
               </iframe>
             </div>
             <div class="calendar-note">
-              <p>📌 <em>Use <strong>Week view</strong> to see hourly slots. Colored blocks are already booked — white space is available. Find a free time, then submit your letter in Step 2 above.</em></p>
+              <p>📌 <em>This view shows available time slots for reference. <strong>Do not book directly</strong> — submit your formal letter in Step 2 above first. You will be given a confirmed time upon approval.</em></p>
             </div>
           </div>
 
