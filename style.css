@@ -704,6 +704,78 @@ address {
 }
 
 /* =============================================
+   DONATE SECTION
+   ============================================= */
+.donate-section {
+  background: var(--cream);
+  text-align: center;
+}
+
+.donate-section-inline {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+
+.donate-card {
+  max-width: 680px;
+  text-align: left;
+}
+
+.donate-zelle-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #fff;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  margin-bottom: 8px;
+}
+
+.donate-zelle-email {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--navy);
+  font-weight: 600;
+  flex: 1;
+  word-break: break-all;
+}
+
+.donate-copy-btn {
+  background: linear-gradient(135deg, var(--gold), #b8870a);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
+}
+
+.donate-copy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(184, 135, 10, 0.4);
+}
+
+.donate-copy-msg {
+  font-size: 0.85rem;
+  color: #16a34a;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.donate-copy-msg.show {
+  opacity: 1;
+}
+
+/* =============================================
    EVENTS / CALENDAR TAB
    ============================================= */
 .events-hero-section {

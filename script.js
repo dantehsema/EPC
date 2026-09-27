@@ -260,3 +260,15 @@ function galleryStopAuto() {
   clearInterval(_gallery.timer);
   _gallery.timer = null;
 }
+
+// =============================================
+//  DONATE — Copy Zelle email to clipboard
+// =============================================
+function copyZelle(emailId, msgId) {
+  const email = document.getElementById(emailId).textContent.trim();
+  navigator.clipboard.writeText(email).then(function () {
+    const msg = document.getElementById(msgId);
+    msg.classList.add('show');
+    setTimeout(function () { msg.classList.remove('show'); }, 2000);
+  });
+}
