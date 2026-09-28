@@ -725,6 +725,8 @@ address {
 .donate-card {
   max-width: 680px;
   text-align: left;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .donate-zelle-box {
