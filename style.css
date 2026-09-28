@@ -732,7 +732,7 @@ address {
 }
 
 .donate-card {
-  max-width: 420px;
+  max-width: 480px;
   width: 100%;
   background: var(--navy);
   border-radius: var(--radius-lg);
@@ -744,7 +744,10 @@ address {
 
 .donate-card-header {
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  padding: 5px 0;
+  padding: 10px 0;
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 1;
 }
 
 .donate-card-body {
