@@ -428,6 +428,9 @@ address {
   color: var(--text-mid);
   max-width: 680px;
   line-height: 1.8;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* =============================================
